@@ -1,6 +1,7 @@
 package ejercicio1_2_3;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,6 +11,9 @@ import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 public class Contactos extends JFrame {
@@ -93,15 +97,55 @@ public class Contactos extends JFrame {
 		txtFechaNac.setBounds(156, 138, 165, 22);
 		contentPane.add(txtFechaNac);
 		
-		JLabel lblDatos = new JLabel("Los datos ingresados fueron:");
+		JLabel lbldatosing = new JLabel("Los datos ingresados fueron:");
+		lbldatosing.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lbldatosing.setBounds(68, 205, 190, 22);
+		contentPane.add(lbldatosing);
+		
+		JLabel lblDatos = new JLabel("");
 		lblDatos.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDatos.setBounds(68, 228, 190, 22);
+		lblDatos.setBounds(68, 228, 253, 22);
 		contentPane.add(lblDatos);
 		
 		btnMostrar = new JButton("Mostrar");
 		btnMostrar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnMostrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblDatos.setText("");
+				
+				if(txtNombre.getText().isEmpty()) {
+					txtNombre.setBackground(Color.RED);
+				}
+				if(txtApellido.getText().isEmpty()) {
+					txtApellido.setBackground(Color.RED);
+				}
+				if(txtTelefono.getText().isEmpty()) {
+					txtTelefono.setBackground(Color.RED);
+				}
+				if(txtFechaNac.getText().isEmpty()) {
+					txtFechaNac.setBackground(Color.RED);
+				}
+				
+				
+				if(!txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtFechaNac.getText().isEmpty() )
+				{
+					lblDatos.setText(txtNombre.getText()+ " "+ txtApellido.getText()+", "+ txtTelefono.getText() + ", " + txtFechaNac.getText() );
+				
+				txtNombre.setText("");
+				txtNombre.setBackground(Color.WHITE);
+				txtApellido.setText("");
+				txtApellido.setBackground(Color.WHITE);
+				txtTelefono.setText("");
+				txtTelefono.setBackground(Color.WHITE);
+				txtFechaNac.setText("");
+				txtFechaNac.setBackground(Color.WHITE);
+				}
+			}
+		});
 		btnMostrar.setBounds(232, 171, 89, 23);
 		contentPane.add(btnMostrar);
+		
+		
 	}
 
 	public void cambiarVisibilidad(boolean estado) {
