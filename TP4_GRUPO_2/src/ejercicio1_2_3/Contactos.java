@@ -104,7 +104,7 @@ public class Contactos extends JFrame {
 		
 		JLabel lblDatos = new JLabel("");
 		lblDatos.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDatos.setBounds(68, 228, 253, 22);
+		lblDatos.setBounds(68, 228, 327, 22);
 		contentPane.add(lblDatos);
 		
 		btnMostrar = new JButton("Mostrar");
