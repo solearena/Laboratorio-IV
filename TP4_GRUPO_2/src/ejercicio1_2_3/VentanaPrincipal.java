@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ejercicio3.FrameEjercicio3;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -14,6 +17,10 @@ import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -73,9 +80,15 @@ public class VentanaPrincipal extends JFrame {
 		JButton btnEjercicio3 = new JButton("Ejercicio 3");
 		btnEjercicio3.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEjercicio3.setBounds(158, 164, 118, 25);
+		btnEjercicio3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SeleccionMultiple e3 = new SeleccionMultiple();
+				e3.setVisible(true);
+			}
+		});
 		contentPane.add(btnEjercicio3);
 	}
-
+	
 	public void cambiarVisibilidad(boolean estado) {
 		
 		setVisible(estado);
