@@ -60,8 +60,14 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(btnEjercicio);
 		
 		JButton btnEjercicio2 = new JButton("Ejercicio 2");
+		btnEjercicio2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Promedio promedio = new Promedio();
+				promedio.cambiarVisibilidad(true);
+			}
+		});
 		btnEjercicio2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEjercicio2.setBounds(158, 111, 118, 25);
+		btnEjercicio2.setBounds(158, 116, 118, 25);
 		contentPane.add(btnEjercicio2);
 		
 		JButton btnEjercicio3 = new JButton("Ejercicio 3");
