@@ -31,9 +31,4 @@ public class edificioOficinas implements Iedificio {
 		return "edificioOficinas [CantOficinas=" + CantOficinas + "]";
 	}
 
-
-
-	
-
-
 }

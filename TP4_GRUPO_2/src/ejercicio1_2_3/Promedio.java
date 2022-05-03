@@ -25,8 +25,8 @@ public class Promedio extends JFrame {
 	private JTextField txtNota1;
 	private JTextField txtNota2;
 	private JTextField txtNota3;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtPromedio;
+	private JTextField txtCondicion;
 
 	/**
 	 * Launch the application.
@@ -92,11 +92,11 @@ public class Promedio extends JFrame {
 		lblNota3.setBounds(44, 86, 46, 14);
 		panel.add(lblNota3);
 		
-		JComboBox cbxTps = new JComboBox();
-		cbxTps.setEditable(true);
-		cbxTps.setModel(new DefaultComboBoxModel(new String[] {"Aprobado", "Desaprobado"}));
-		cbxTps.setBounds(100, 114, 123, 20);
-		panel.add(cbxTps);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setEditable(true);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Aprobado", "Desaprobado"}));
+		comboBox.setBounds(100, 114, 123, 20);
+		panel.add(comboBox);
 		
 		JLabel lblTps = new JLabel("TPS:");
 		lblTps.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -109,19 +109,19 @@ public class Promedio extends JFrame {
 		panel_1.setBounds(31, 167, 250, 89);
 		contentPane.add(panel_1);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setEnabled(false);
-		textField.setColumns(10);
-		textField.setBounds(100, 21, 123, 20);
-		panel_1.add(textField);
+		txtPromedio = new JTextField();
+		txtPromedio.setEditable(false);
+		txtPromedio.setEnabled(false);
+		txtPromedio.setColumns(10);
+		txtPromedio.setBounds(100, 21, 123, 20);
+		panel_1.add(txtPromedio);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setEnabled(false);
-		textField_1.setColumns(10);
-		textField_1.setBounds(100, 52, 123, 20);
-		panel_1.add(textField_1);
+		txtCondicion = new JTextField();
+		txtCondicion.setEditable(false);
+		txtCondicion.setEnabled(false);
+		txtCondicion.setColumns(10);
+		txtCondicion.setBounds(100, 52, 123, 20);
+		panel_1.add(txtCondicion);
 		
 		JLabel lblPromedio = new JLabel("Promedio:");
 		lblPromedio.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -139,12 +139,100 @@ public class Promedio extends JFrame {
 		btnCalcular.setForeground(Color.BLACK);
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				int total;
+				int aux;
+				int aux2=0;
+				int aux3=0;
+				int aux4=0;
+				
+				total = Integer.parseInt(txtNota1.getText()) + Integer.parseInt(txtNota2.getText()) + Integer.parseInt(txtNota3.getText());
+
+				
+				if(Integer.parseInt(txtNota1.getText())<6) {
+					aux2 =1;
+				}
+				else if(Integer.parseInt(txtNota1.getText())>=8){
+					aux3++;
+				} else  {
+					aux4++;
+				}
+				
+				
+				if(Integer.parseInt(txtNota2.getText())<6) {
+					aux2 =1;
+				}
+				else if(Integer.parseInt(txtNota2.getText())>=8){
+					aux3++;
+				} else  {
+					aux4++;
+				}
+				
+				if(Integer.parseInt(txtNota3.getText())<6) {
+					aux2 =1;
+				}
+				else if(Integer.parseInt(txtNota3.getText())>=8){
+					aux3++;
+				} else  {
+					aux4++;
+				}
+					
+				
+				//Si el tp Está desaprobado
+				if("Desaprobado"== comboBox.getSelectedItem().toString()){
+					
+					aux = total /3;
+					txtPromedio.setText(String.valueOf(aux));
+					txtCondicion.setText("Libre");
+				
+				}
+			
+				//Si la nota es inferior a 6
+				if(aux2==1) {
+					aux = total /3;
+					txtPromedio.setText(String.valueOf(aux));
+					txtCondicion.setText("Libre");
+				}
+				
+				//Si la nota es 8 para arriba y está aprobado el tp
+				
+				if("Aprobado"== comboBox.getSelectedItem().toString()){
+					
+					if(aux3==3) {
+						aux = total /3;
+					txtPromedio.setText(String.valueOf(aux));
+					txtCondicion.setText("Promocionado");}
+				}
+	
+				// Si la nota está entre 6 y 8, y el tp está aprobado
+				
+				if("Aprobado"== comboBox.getSelectedItem().toString()){
+					
+					if(aux4==3) {
+						aux = total /3;
+						txtPromedio.setText(String.valueOf(aux));
+						txtCondicion.setText("Regular");
+					}
+				}
+				
+				
+				
 			}
 		});
 		btnCalcular.setBounds(312, 50, 101, 32);
 		contentPane.add(btnCalcular);
 		
 		JButton btnNuevo = new JButton("NUEVO");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				txtCondicion.setText(null);
+				txtNota1.setText(null);
+				txtNota2.setText(null);
+				txtNota3.setText(null);
+				txtPromedio.setText(null);
+			}
+		});
 		btnNuevo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNuevo.setBackground(SystemColor.activeCaption);
 		btnNuevo.setForeground(Color.BLACK);
@@ -152,6 +240,13 @@ public class Promedio extends JFrame {
 		contentPane.add(btnNuevo);
 		
 		JButton btnSalir = new JButton("SALIR");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				
+				
+			}
+		});
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnSalir.setBackground(SystemColor.activeCaption);
 		btnSalir.setForeground(Color.BLACK);
