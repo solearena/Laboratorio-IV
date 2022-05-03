@@ -116,14 +116,26 @@ public class Contactos extends JFrame {
 				if(txtNombre.getText().isEmpty()) {
 					txtNombre.setBackground(Color.RED);
 				}
+				else {
+					txtNombre.setBackground(Color.WHITE);
+				}
 				if(txtApellido.getText().isEmpty()) {
 					txtApellido.setBackground(Color.RED);
+				}
+				else {
+					txtApellido.setBackground(Color.WHITE);
 				}
 				if(txtTelefono.getText().isEmpty()) {
 					txtTelefono.setBackground(Color.RED);
 				}
+				else {
+					txtTelefono.setBackground(Color.WHITE);
+				}
 				if(txtFechaNac.getText().isEmpty()) {
 					txtFechaNac.setBackground(Color.RED);
+				}
+				else {
+					txtFechaNac.setBackground(Color.WHITE);
 				}
 				
 				

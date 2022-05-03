@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Promedio extends JFrame {
 
@@ -63,16 +65,37 @@ public class Promedio extends JFrame {
 		panel.setLayout(null);
 		
 		txtNota1 = new JTextField();
+		txtNota1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char car = e.getKeyChar();
+		        if((car<'0' || car>'9') && (car<',' || car>'.')) e.consume();
+				}
+		});
 		txtNota1.setBounds(100, 21, 123, 20);
 		panel.add(txtNota1);
 		txtNota1.setColumns(10);
 		
 		txtNota2 = new JTextField();
+		txtNota2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char car = e.getKeyChar();
+		        if((car<'0' || car>'9') && (car<',' || car>'.')) e.consume();
+				}
+		});
 		txtNota2.setColumns(10);
 		txtNota2.setBounds(100, 52, 123, 20);
 		panel.add(txtNota2);
 		
 		txtNota3 = new JTextField();
+		txtNota3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char car = e.getKeyChar();
+		        if((car<'0' || car>'9') && (car<',' || car>'.')) e.consume();
+				}
+		});
 		txtNota3.setColumns(10);
 		txtNota3.setBounds(100, 83, 123, 20);
 		panel.add(txtNota3);
@@ -140,83 +163,25 @@ public class Promedio extends JFrame {
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int total;
-				int aux;
-				int aux2=0;
-				int aux3=0;
-				int aux4=0;
-				
-				total = Integer.parseInt(txtNota1.getText()) + Integer.parseInt(txtNota2.getText()) + Integer.parseInt(txtNota3.getText());
+				float nota1 = Float.parseFloat(txtNota1.getText());
+				float nota2 = Float.parseFloat(txtNota2.getText());
+				float nota3 = Float.parseFloat(txtNota3.getText());
+				float promedio = (nota1 + nota2 + nota3) / 3;
+				txtPromedio.setText(String.valueOf(promedio));
 
-				
-				if(Integer.parseInt(txtNota1.getText())<6) {
-					aux2 =1;
-				}
-				else if(Integer.parseInt(txtNota1.getText())>=8){
-					aux3++;
-				} else  {
-					aux4++;
-				}
-				
-				
-				if(Integer.parseInt(txtNota2.getText())<6) {
-					aux2 =1;
-				}
-				else if(Integer.parseInt(txtNota2.getText())>=8){
-					aux3++;
-				} else  {
-					aux4++;
-				}
-				
-				if(Integer.parseInt(txtNota3.getText())<6) {
-					aux2 =1;
-				}
-				else if(Integer.parseInt(txtNota3.getText())>=8){
-					aux3++;
-				} else  {
-					aux4++;
-				}
-					
-				
-				//Si el tp Está desaprobado
-				if("Desaprobado"== comboBox.getSelectedItem().toString()){
-					
-					aux = total /3;
-					txtPromedio.setText(String.valueOf(aux));
+				if (comboBox.getSelectedItem().toString() == "Desaprobado") {
 					txtCondicion.setText("Libre");
-				
-				}
-			
-				//Si la nota es inferior a 6
-				if(aux2==1) {
-					aux = total /3;
-					txtPromedio.setText(String.valueOf(aux));
-					txtCondicion.setText("Libre");
-				}
-				
-				//Si la nota es 8 para arriba y está aprobado el tp
-				
-				if("Aprobado"== comboBox.getSelectedItem().toString()){
-					
-					if(aux3==3) {
-						aux = total /3;
-					txtPromedio.setText(String.valueOf(aux));
-					txtCondicion.setText("Promocionado");}
-				}
-	
-				// Si la nota está entre 6 y 8, y el tp está aprobado
-				
-				if("Aprobado"== comboBox.getSelectedItem().toString()){
-					
-					if(aux4==3) {
-						aux = total /3;
-						txtPromedio.setText(String.valueOf(aux));
-						txtCondicion.setText("Regular");
+				} else {
+					if (nota1 >= 8 && nota2 >= 8 && nota3 >= 8) {
+						txtCondicion.setText("Promocionado");
+					} else {
+						if (nota1 < 6 || nota2 < 6 || nota3 < 6) {
+							txtCondicion.setText("Libre");
+						} else {
+							txtCondicion.setText("Regular");
+						}
 					}
 				}
-				
-				
-				
 			}
 		});
 		btnCalcular.setBounds(312, 50, 101, 32);

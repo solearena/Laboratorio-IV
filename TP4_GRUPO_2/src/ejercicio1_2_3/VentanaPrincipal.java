@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ejercicio3.FrameEjercicio3;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
